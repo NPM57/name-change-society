@@ -1,0 +1,15 @@
+version: '3.3'
+services:
+  client:
+    image: myclient:latest
+    ports:
+     - "80:3000"
+    command: "npm --prefix /usr/src/app run start"
+    volumes:
+     - "./client:/usr/src/app"
+  server:
+    image: myserver:latest
+    ports:
+     - "8000:8000"
+    volumes:
+     - "./server:/var/www"

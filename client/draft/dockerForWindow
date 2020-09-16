@@ -1,0 +1,19 @@
+docker run -it --mount type=bind,source="D:/ProjectDevelopment/Laravel-react/name-change-society"/client,target=/usr/src/app myclient:latest /bin/sh
+
+
+D:\ProjectDevelopment\Laravel-react\name-change-society
+
+docker run -p 80:3000 --mount src=client,target=/usr/src/app myclient:latest npm start
+
+
+docker run \
+    -it \
+    --rm \
+    -v ${PWD}:/app \
+    -v /app/node_modules \
+    -p 80:3000 \
+    -e CHOKIDAR_USEPOLLING=true \
+    myclient:latest
+
+
+docker run -it --rm -v %cd%:/app -v /app/node_modules -p 80:3000 -e CHOKIDAR_USEPOLLING=true myclient:latest
