@@ -1,7 +1,7 @@
 FROM alpine:latest
 FROM node:latest
 # set working directory
-WORKDIR /app
+WORKDIR /app/client
 
 # add `/app/node_modules/.bin` to $PATH
 ENV PATH /app/node_modules/.bin:$PATH

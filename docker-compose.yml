@@ -1,15 +1,51 @@
-version: '3.3'
+version: '3.7'
 services:
   client:
-    image: myclient:latest
+    build: 
+      context: ./client
+      dockerfile: Dockerfile
+    tty: true
     ports:
-     - "80:3000"
-    command: "npm --prefix /usr/src/app run start"
+      - "3000:3000"
     volumes:
-     - "./client:/usr/src/app"
+      - "./client:/app/client"
+    depends_on: 
+      - server
+    networks: 
+      - app
+
   server:
-    image: myserver:latest
+    build: 
+      context: ./server
+      dockerfile: Dockerfile
+    environment: 
+      DB_HOST: db
+      DB_DATABASE: base
+      DB_USERNAME: root
+      DB_PASSWORD: root
     ports:
-     - "8000:8000"
+      - "8000:8000"
     volumes:
-     - "./server:/var/www"
+      - "./server:/app/server"
+    depends_on: 
+      - db
+    networks: 
+      - app
+
+  db:
+    image: mysql:5.7
+    restart: always
+    environment:
+      MYSQL_DATABASE: 'base'
+      MYSQL_USER: 'root'
+      MYSQL_PASSWORD: 'root'
+      MYSQL_ROOT_PASSWORD: 'root'
+    networks: 
+      - app
+    volumes: 
+      - .dbdata:/var/lib/mysql/
+    ports:
+      - "127.0.0.1:3306:3306"
+networks: 
+  app:
+    driver: bridge
