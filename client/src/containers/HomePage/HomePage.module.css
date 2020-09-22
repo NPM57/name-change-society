@@ -1,0 +1,22 @@
+.Table{
+    width: 100%;
+}
+
+.THead{
+    display: block;
+    width: 100%;
+}
+
+.TBody{
+    width: 100%;
+    display: block;
+    overflow-y: scroll;    /* Trigger vertical scroll    */
+    overflow-x: hidden;  /* Hide the horizontal scroll */
+    height: 550px;
+}
+.Tr{
+    width: 100%;
+}
+.Td{
+    width: 50%;
+}
