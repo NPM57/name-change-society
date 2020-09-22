@@ -100,6 +100,10 @@ class UserController extends Controller
             return response("Duplicated Name or Email", Response::HTTP_INTERNAL_SERVER_ERROR);
         }
 
+        if(!$request->name && !$request->email && !$request->role_id){
+            return response("Empty Request is not allowed", Response::HTTP_INTERNAL_SERVER_ERROR);
+        }
+
         $this->historicalNameService->createRecord($user->name, $user->id);
 
         $now = Carbon::now();
@@ -150,6 +154,10 @@ class UserController extends Controller
             return response("Duplicated Name or Email", Response::HTTP_INTERNAL_SERVER_ERROR);
         }
 
+        if(!$request->name && !$request->email && !$request->role_id){
+            return response("Empty Request is not allowed", Response::HTTP_INTERNAL_SERVER_ERROR);
+        }
+        
         $this->historicalNameService->createRecord($user->name, $user->id);
 
         $now = Carbon::now();
