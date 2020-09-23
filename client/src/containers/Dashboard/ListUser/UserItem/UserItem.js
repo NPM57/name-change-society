@@ -13,11 +13,14 @@ class UserItem extends Component {
             id: '',
             name: '',
             UpdateNameAt: '',
+            error:''
         },
         prefillData: {
             id: '',
             name: '',
             UpdateNameAt: '',
+            error:'',
+            customMessage:''
         }
     }
 
@@ -43,7 +46,6 @@ class UserItem extends Component {
         }
 
         console.log(this.state.prefillData);
-
     }
 
     clickHandler = () => {
@@ -76,11 +78,17 @@ class UserItem extends Component {
                 }
             })
             .catch(error => {
-                console.log(error);
+                this.setState({
+                    prefillData: {
+                        error: error.message,
+                        customMessage: 'Either you have use this name before or Someone else is using it. Please try with another name!'
+                    },
+                })
             });
     }
 
     render() {
+        const error = this.state.prefillData.customMessage;
         return (
             <tr key={this.props.Id} className={classes.Tr}>
                 <td className={classes.Td}>{this.state.updatedData.id}</td>
@@ -95,6 +103,7 @@ class UserItem extends Component {
                         disabled={!this.state.updatedData.name}
                     />
                 </td>
+                <td className={classes.Error}>{error}</td>
             </tr>
         );
     }

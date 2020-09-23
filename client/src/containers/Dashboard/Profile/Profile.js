@@ -29,7 +29,9 @@ class Profile extends Component {
             name: '',
             email: '',
             role: '',
-            updated_time: ''
+            updated_time: '',
+            error:'',
+            customMessage:''
         },
         formIsValid: false,
         loading: true,
@@ -113,8 +115,13 @@ class Profile extends Component {
                     });
                 }
             })
-            .catch(error => {
-                console.log(error);
+            .catch(error => {    
+                this.setState({
+                    info:{
+                        error: error.message,
+                        customMessage: 'Either you have use this name before or Someone else is using it. Please try with another name!'
+                    }
+                })
             });
     }
 
@@ -136,6 +143,7 @@ class Profile extends Component {
 
 
     render() {
+        const error = this.state.info.customMessage;
         const formElementArray = [];
         for (let key in this.state.profile) {
             formElementArray.push({
@@ -177,6 +185,7 @@ class Profile extends Component {
 
         return (
             <div className={classes.Profile}>
+                <p className={classes.Error}>{error}</p>
                 <form onSubmit={this.submitHandler}>
                     {form}
                     <Button btnType="Success">Submit your new Name</Button>

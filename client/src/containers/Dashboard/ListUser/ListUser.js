@@ -26,7 +26,6 @@ class ListUser extends Component {
     }
 
     updateData() {
-        console.log('token update data', this.props.token);
         const config = {
             headers: { Authorization: `Bearer ${this.props.token}` }
         };

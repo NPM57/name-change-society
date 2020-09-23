@@ -22,3 +22,7 @@
 .Td {
     left: 0;
 }
+
+.Error{
+    color:red;
+}
